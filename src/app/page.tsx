@@ -1,4 +1,5 @@
 "use client";
+import { log } from "console";
 import { useState } from "react";
 
 
@@ -23,7 +24,7 @@ const callGetResponse = async () => {
   setTheInput("");
   console.log("Calling OpenAI...");
 
-  console.log("messages", messages);
+
 
   const response = await fetch("/api", {
     method: "POST",
@@ -39,10 +40,12 @@ const callGetResponse = async () => {
   const data = await response.json();
 
 
+  console.log("OpenAI replied...", data);
+  
 
 
   const { output } = data;
-  // console.log("OpenAI replied...", output.content);
+  console.log("OpenAI replied...", output.content);
 
   setMessages((prevMessages) => [...prevMessages, output]);
   setIsLoading(false);
@@ -63,10 +66,10 @@ const callGetResponse = async () => {
           <div className="flex  h-[35rem] w-[40rem] flex-col items-center bg-gray-600 rounded-xl">
             <div className=" h-full flex flex-col gap-2 overflow-y-auto py-8 px-3 w-full">
             <div className=" h-full flex flex-col gap-2 overflow-y-auto py-8 px-3 w-full">
-              {messages.map((e) => {
+              {messages.map((e,index) => {
                 return (
                   <div
-                    key={e.content}
+                    key={index}
                     className={`w-max max-w-[18rem] rounded-md px-4 py-3 h-min ${
                       e.role === "assistant"
                         ? "self-start  bg-gray-200 text-gray-800"
