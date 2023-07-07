@@ -23,18 +23,26 @@ const callGetResponse = async () => {
   setTheInput("");
   console.log("Calling OpenAI...");
 
+  console.log("messages", messages);
+
   const response = await fetch("/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
 
+    
+    
     body: JSON.stringify({ messages }),
   });
 
   const data = await response.json();
+
+
+
+
   const { output } = data;
-  console.log("OpenAI replied...", output.content);
+  // console.log("OpenAI replied...", output.content);
 
   setMessages((prevMessages) => [...prevMessages, output]);
   setIsLoading(false);

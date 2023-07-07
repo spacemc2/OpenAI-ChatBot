@@ -14,7 +14,7 @@ export async function POST(req: Request, res: NextResponse) {
       model: "gpt-3.5-turbo",
       messages: body.messages,
     });
-    console.log(completion.data.choices[0].message);
+    // console.log(completion.data.choices[0].message);
     const theResponse = completion.data.choices[0].message;
   
     return NextResponse.json({ output: theResponse }, { status: 200 })
